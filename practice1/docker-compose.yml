@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  fastapi:
+    build: .
+    container_name: fastapi_app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - ffmpeg
+    networks:
+      - backend
+
+  ffmpeg:
+    image: jrottenberg/ffmpeg:latest
+    container_name: ffmpeg_container
+    networks:
+      - backend
+    volumes:
+      - ./media:/media  # Mount a local directory to store media files
+
+networks:
+  backend:
+    driver: bridge
+
