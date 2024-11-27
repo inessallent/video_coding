@@ -18,6 +18,7 @@ services:
       - backend
     volumes:
       - ./media:/media  # Mount a local directory to store media files
+    command: ffmpeg -f lavfi -i anullsrc=r=44100:cl=stereo -t 3600 -f null -
 
 networks:
   backend:
